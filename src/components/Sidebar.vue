@@ -217,8 +217,8 @@ export default defineComponent({
 		pointer-events: auto;
 		margin-right: -0.5rem;
 		padding: 0.2rem 0.5rem 0 0.2rem;
-		width: 25rem;
-        align-items: flex-end;
+		width: min(32rem, 80vw);
+		align-items: flex-end;
 		overscroll-behavior: contain;
 
 		&:not(:hover):not(:focus-within) {
@@ -235,7 +235,7 @@ export default defineComponent({
 		margin-bottom: 1rem;
 		box-sizing: border-box;
 		width: 100%;
-		max-width: 25rem;
+		max-width: 31rem;
 		flex: 0 0 auto;
 
 		.section__heading {
