@@ -132,15 +132,21 @@ function buildWorlds(response: any): Array<DynmapWorld> {
 				console.warn(`Ignoring map '${map.name}' associated with non-existent world '${worldName}'`);
 				return;
 			}
+			let mapName = map.name;
+			if (w.maps.has(mapName)) {
+				mapName = `${map.name}__${world.name}`;
+				console.log(`Will use the name ${mapName} instead`);
+			}
 
-			w.maps.set(map.name, {
+			w.maps.set(mapName, {
 				world: world, //Ignore append_to_world here otherwise things break
+				appendToWorld: w,
 				background: map.background || '#000000',
 				backgroundDay: map.backgroundday || '#000000',
 				backgroundNight: map.backgroundnight || '#000000',
 				icon: map.icon || undefined,
 				imageFormat: map['image-format'] || 'png',
-				name: map.name || '(Unnamed map)',
+				name: mapName || '(Unnamed map)',
 				nightAndDay: map.nightandday || false,
 				prefix: map.prefix || '',
 				protected: map.protected || false,

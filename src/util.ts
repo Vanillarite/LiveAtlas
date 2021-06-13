@@ -227,7 +227,7 @@ export const getUrlForLocation = (world: DynmapWorld, map: DynmapWorldMap, locat
 			return '';
 		}
 
-		return `#${world.name};${map.name};${locationString};${zoom}`;
+		return `#${map.appendToWorld.name};${map.name};${locationString};${zoom}`;
 }
 
 export const focus = (selector: string) => {

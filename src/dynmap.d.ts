@@ -106,6 +106,7 @@ interface DynmapWorld {
 
 interface DynmapWorldMap {
 	world: DynmapWorld;
+	appendToWorld: DynmapWorld;
 	name: string;
 	icon: string;
 	title: string;

@@ -15,12 +15,12 @@
   -->
 
 <template>
-	<div class="world">
+	<div class="world" v-if="world.maps.size > 0">
 		<span class="world__name" aria-hidden="true">{{ world.title }}</span>
 		<div class="world__maps menu">
 			<template v-for="[key, map] in world.maps" :key="`${world.name}_${key}`">
 				<input :id="`${name}-${world.name}-${key}`" type="radio" :name="name"
-				       v-bind:value="[world.name,map.name]" v-model="currentMap"
+				       v-bind:value="[world.name,map.name,map.world.name]" v-model="currentMap"
 				       :aria-labelledby="`${name}-${world.name}-${key}-label`">
 				<label :id="`${name}-${world.name}-${key}-label`" class="map" :for="`${name}-${world.name}-${key}`" :title="`${world.title} - ${map.title}`">
 					<SvgIcon :name="getMapIcon(map)"></SvgIcon>
@@ -66,10 +66,10 @@ export default defineComponent({
 		currentMap: {
 			get() {
 				const store = useStore();
-				return store.state.currentMap ? [store.state.currentWorld!.name, store.state.currentMap.name] : undefined;
+				return store.state.currentMap ? [store.state.currentWorld!.name, store.state.currentMap.name, store.state.currentMap.world.name] : undefined;
 			},
 			set(value: string[]) {
-				useStore().commit(MutationTypes.SET_CURRENT_MAP, {worldName: value[0], mapName: value[1]});
+				useStore().commit(MutationTypes.SET_CURRENT_MAP, {worldName: value[0], mapName: value[1], realWorldName: value[2]});
 			}
 		}
 	},
@@ -79,7 +79,7 @@ export default defineComponent({
 			let worldType: string,
 				mapType: string;
 
-			if (/(^|_)nether(_|$)/i.test(this.world.name) || (this.world.name == 'DIM-1') || /Nether$/.test(this.world.name)) {
+			if (/(^|_)nether(_|$)/i.test(this.world.name) || (this.world.name == 'DIM-1') || /Nether$/.test(this.world.name) || /__(.+_)?nether(_|$)/i.test(map.name)) {
 				worldType = 'nether';
 				mapType = ['surface', 'nether'].includes(map.name) ? 'surface' : 'flat';
 			} else if (/(^|_)end(_|$)/i.test(this.world.name) || (this.world.name == 'DIM1')) {
@@ -89,7 +89,6 @@ export default defineComponent({
 				worldType = 'world';
 				mapType = ['surface', 'flat', 'biome', 'cave'].includes(map.name) ? map.name : 'flat';
 			}
-
 			return `block_${worldType}_${mapType}`;
 		}
 	}
