@@ -295,7 +295,7 @@ function buildMarker(marker: any): DynmapMarker {
 			y: marker.y || 0,
 			z: marker.z || 0,
 		},
-		dimensions: marker.dim ? marker.dim.split('x') : [16, 16],
+		dimensions: [16, 16],
 		icon: marker.icon || "default",
 		isHTML: marker.markup || false,
 		minZoom: typeof marker.minzoom !== 'undefined' && marker.minzoom > -1 ? marker.minzoom : undefined,
