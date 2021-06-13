@@ -228,7 +228,7 @@ export const getUrlForLocation = (world: LiveAtlasWorld, map: LiveAtlasWorldMap,
 			return '';
 		}
 
-		return `#${world.name};${map.name};${locationString};${zoom}`;
+		return `#${map.appendToWorld.name};${map.name};${locationString};${zoom}`;
 }
 
 export const focus = (selector: string) => {

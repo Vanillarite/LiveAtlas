@@ -284,7 +284,7 @@ export default defineComponent({
 				followMapName = store.state.configuration.followMap,
 				currentWorld = store.state.currentWorld;
 
-			let targetWorld = null;
+			let targetWorld: any = null;
 
 			if(!this.leaflet) {
 				console.warn(`Cannot follow ${player.account}. Map not yet initialized.`);
@@ -314,7 +314,7 @@ export default defineComponent({
 
 			let map = followMapName && targetWorld.maps.has(followMapName)
 				? targetWorld.maps.get(followMapName)
-				: targetWorld.maps.entries().next().value[1]
+				: Array.from(store.state.maps.entries()).filter(([i, j]) => j.world.name === targetWorld.name)[0][1]
 
 			if(map !== store.state.currentMap && (targetWorld !== currentWorld || newFollow)) {
 				this.scheduledPan = player.location;
@@ -325,7 +325,7 @@ export default defineComponent({
 				}
 
 				console.log(`Switching map to match player ${targetWorld.name} ${map.name}`);
-				store.commit(MutationTypes.SET_CURRENT_MAP, {worldName: targetWorld.name, mapName: map.name});
+				store.commit(MutationTypes.SET_CURRENT_MAP, {worldName: map.appendToWorld.name, mapName: map.name, realWorldName: targetWorld.name});
 			} else {
 				this.leaflet!.panTo(store.state.currentProjection.locationToLatLng(player.location));
 

@@ -41,6 +41,7 @@ import {
 export type CurrentMapPayload = {
 	worldName: string;
 	mapName: string;
+	realWorldName: string;
 }
 
 export type Mutations<S = State> = {
@@ -452,27 +453,33 @@ export const mutations: MutationTree<State> & Mutations = {
 	},
 
 	//Sets the currently active map/world
-	[MutationTypes.SET_CURRENT_MAP](state: State, {worldName, mapName}) {
+	[MutationTypes.SET_CURRENT_MAP](state: State, {worldName, mapName, realWorldName}) {
+		const originalMapName = mapName;
 		mapName = [worldName, mapName].join('_');
+		console.log(`${mapName}`);
 
+		console.log(Array.from(state.worlds.entries()));
 		if(!state.worlds.has(worldName)) {
 			throw new RangeError(`Unknown world ${worldName}`);
 		}
+		if(!state.worlds.has(realWorldName)) {
+			throw new RangeError(`Unknown real world ${realWorldName}`);
+		}
+		const newWorld = state.worlds.get(worldName)!;
+		const newRealWorld = state.worlds.get(realWorldName)!;
 
-		if(!state.maps.has(mapName)) {
-			throw new RangeError(`Unknown map ${mapName}`);
+		console.log(Array.from(newWorld.maps.entries()));
+		if(!newWorld.maps.has(originalMapName)) {
+			throw new RangeError(`Unknown map ${originalMapName}`);
 		}
 
-		const newWorld = state.worlds.get(worldName);
-
-		if(state.currentWorld !== newWorld) {
-			state.currentWorld = state.worlds.get(worldName);
+		if(state.currentWorld !== newRealWorld) {
+			state.currentWorld = newRealWorld;
 			state.markerSets.clear();
 			state.pendingSetUpdates.clear();
 			state.pendingTileUpdates = [];
 		}
-
-		state.currentMap = state.maps.get(mapName);
+		state.currentMap = newWorld.maps.get(originalMapName);
 	},
 
 	//Sets the projection to use for coordinate conversion in the current map

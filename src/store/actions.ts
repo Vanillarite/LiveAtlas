@@ -101,7 +101,7 @@ export const actions: ActionTree<State, State> & Actions = {
 			commit(MutationTypes.SET_UI_ELEMENT_VISIBILITY, {element: 'maps', state: true});
 		}
 
-		let worldName, mapName;
+		let worldName, mapName, realWorldName;
 
 		// Use config default world if it exists
 		if(config.config.defaultWorld && state.worlds.has(config.config.defaultWorld)) {
@@ -135,11 +135,16 @@ export const actions: ActionTree<State, State> & Actions = {
 			if(!mapName) {
 				mapName = world.maps.size ? world.maps.entries().next().value[1].name : undefined;
 			}
+
+			if (mapName) {
+				const map = world.maps.get(mapName) as DynmapWorldMap;
+				realWorldName = map.world.name;
+			}
 		}
 
-		if(worldName && mapName) {
+		if(worldName && mapName && realWorldName) {
 			commit(MutationTypes.SET_CURRENT_MAP, {
-				worldName, mapName
+				worldName, mapName, realWorldName
 			});
 		}
 
