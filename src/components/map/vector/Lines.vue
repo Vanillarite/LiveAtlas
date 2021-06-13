@@ -50,8 +50,10 @@ export default defineComponent({
 
 			createLines = () => {
 				const converter = getPointConverter();
+				const ordered = Array.from(props.set.lines.keys()).sort().reverse();
 
-				props.set.lines.forEach((line: DynmapLine, id: string) => {
+				ordered.forEach((id: string) => {
+					const line: DynmapLine = props.set.lines.get(id)!;
 					const layer = createLine(line, converter);
 
 					layers.set(id, layer);
