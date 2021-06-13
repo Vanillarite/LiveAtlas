@@ -79,7 +79,7 @@ export default defineComponent({
 			let worldType: string,
 				mapType: string;
 
-			if (/(^|_)nether(_|$)/i.test(this.world.name) || (this.world.name == 'DIM-1')) {
+			if (/(^|_)nether(_|$)/i.test(this.world.name) || (this.world.name == 'DIM-1') || /Nether$/.test(this.world.name)) {
 				worldType = 'nether';
 				mapType = ['surface', 'nether'].includes(map.name) ? 'surface' : 'flat';
 			} else if (/(^|_)end(_|$)/i.test(this.world.name) || (this.world.name == 'DIM1')) {
