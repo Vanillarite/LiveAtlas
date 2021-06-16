@@ -433,9 +433,7 @@ export const mutations: MutationTree<State> & Mutations = {
 	[MutationTypes.SET_CURRENT_MAP](state: State, {worldName, mapName, realWorldName}) {
 		const originalMapName = mapName;
 		mapName = [worldName, mapName].join('_');
-		console.log(`${mapName}`);
 
-		console.log(Array.from(state.worlds.entries()));
 		if(!state.worlds.has(worldName)) {
 			throw new RangeError(`Unknown world ${worldName}`);
 		}
@@ -445,7 +443,6 @@ export const mutations: MutationTree<State> & Mutations = {
 		const newWorld = state.worlds.get(worldName)!;
 		const newRealWorld = state.worlds.get(realWorldName)!;
 
-		console.log(Array.from(newWorld.maps.entries()));
 		if(!newWorld.maps.has(originalMapName)) {
 			throw new RangeError(`Unknown map ${originalMapName}`);
 		}
