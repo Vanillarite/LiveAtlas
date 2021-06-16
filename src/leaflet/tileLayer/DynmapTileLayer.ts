@@ -150,6 +150,15 @@ export class DynmapTileLayer extends TileLayer {
 		}
 	}
 
+	_initTile(tile: any) {
+        (TileLayer.prototype as any)._initTile.call(this, tile);
+
+        var tileSize = this.getTileSize();
+
+        tile.style.width = tileSize.x + 1 + 'px';
+        tile.style.height = tileSize.y + 1 + 'px';
+    }
+
 	createTile(coords: Coords, done: DoneCallback) {
 		//Clone template image instead of creating a new one
 		const tile = this._tileTemplate.cloneNode(false) as DynmapTileElement;
