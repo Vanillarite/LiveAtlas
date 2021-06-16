@@ -127,13 +127,12 @@ function buildWorlds(response: any): Array<LiveAtlasWorld> {
 				w = worlds.get(worldName);
 
 			if(!w) {
-				console.warn(`Ignoring map '${map.name}' associated with non-existent world '${worldName}'`);
+				console.warn(`Ignoring map '${map.name}' associated with non-existant world '${worldName}'`);
 				return;
 			}
 			let mapName = map.name;
 			if (w.maps.has(mapName)) {
 				mapName = `${map.name}__${world.name}`;
-				console.log(`Will use the name ${mapName} instead`);
 			}
 
 			w.maps.set(mapName, {
