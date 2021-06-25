@@ -201,7 +201,6 @@ export default defineComponent({
 			}
 		}
 
-		@media (max-width: 400px) {
 		@media (max-width: 400px), (max-height: 480px) {
 			right: 0.5rem;
 			top: 0.5rem;
