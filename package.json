@@ -8,7 +8,8 @@
     "build": "vue-tsc --noEmit && vite build --out-dir dist",
     "lint": "eslint --ext .ts,.vue src",
     "lint:fix": "eslint -ext .ts,.vue src --fix",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "deploy": "npm run build && rsync -r --progress ./dist/* houju:/var/www/dynmap/"
   },
   "dependencies": {
     "@kyvg/vue3-notification": "^2.3.0",
