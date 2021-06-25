@@ -40,7 +40,7 @@ if(splash) {
 	});
 }
 
-console.info(`LiveAtlas version ${store.state.version} - https://github.com/JLyne/LiveAtlas`);
+console.info(`Fork of LiveAtlas version ${store.state.version} - https://github.com/rymiel/LiveAtlas`);
 
 store.subscribe((mutation, state) => {
 	if(mutation.type === 'toggleSidebarSectionCollapsedState' || mutation.type === 'setSidebarSectionCollapsedState') {

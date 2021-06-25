@@ -16,44 +16,12 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/live-atlas/favicons/apple-touch-icon.png">
 
     <meta name="keywords" content="minecraft, map, dynamic, liveatlas" />
-	<meta name="description" content="Minecraft Dynamic Map" />
+	<meta name="description" content="Vanillarite Dynamic Map" />
 
-    <title>Minecraft Dynamic Map - LiveAtlas</title>
+    <title>Vanillarite Dynamic Map</title>
 
     <script>
-        window.liveAtlasConfig = {
-            messages: {
-            	chatNoMessages: 'No chat messages yet...',
-                chatTitle: 'Chat',
-                chatLogin: 'Please {{link}} to send chat messages',
-                chatLoginLink: 'login',
-                chatSend: 'Send',
-                chatPlaceholder: 'Type your chat message here...',
-                chatErrorUnknown: 'Unexpected error while sending chat message',
-                chatErrorDisabled: 'Chat is not enabled',
-            	serversHeading: 'Servers',
-                worldsSkeleton: 'No maps have been configured',
-                playersSkeleton: 'No players are currently online',
-                playersTitle: 'Click to center on player\nDouble-click to follow player',
-                playersTitleHidden: 'This player is currently hidden from the map\nDouble-click to follow player when they become visible',
-                playersTitleOtherWorld: 'This player is in another world.\nClick to center on player\nDouble-click to follow player',
-                followingHeading: 'Following',
-                followingUnfollow: 'Unfollow',
-                followingTitleUnfollow: 'Stop following this player',
-                followingHidden: 'Currently hidden',
-                linkTitle: 'Copy link to current location',
-                loadingTitle: 'Loading...',
-                locationRegion: 'Region',
-                locationChunk: 'Chunk',
-                contextMenuCopyLink: 'Copy link to here',
-                contextMenuCenterHere: 'Center here',
-                toggleTitle: 'Click to toggle this section',
-                mapTitle: 'Map - Use the arrow keys to pan the map',
-                layersTitle: 'Layers',
-                copyToClipboardSuccess: 'Copied to clipboard',
-                copyToClipboardError: 'Unable to copy to clipboard',
-            }
-        };
+    window.liveAtlasConfig={servers:{survival:{label:"Survival",dynmap:{configuration:"/survival/configuration",update:"/survival/update?world={world}&ts={timestamp}",sendmessage:"/-",login:"/-",register:"/-",tiles:"/survival/tiles/",markers:"/survival/markers?marker="}},minigames:{label:"Minigames",dynmap:{configuration:"/minigames/configuration",update:"/minigames/update?world={world}&ts={timestamp}",sendmessage:"/-",login:"/-",register:"/-",tiles:"/minigames/tiles/",markers:"/minigames/markers?marker="}}},messages:{chatNoMessages:"No chat messages yet...",chatTitle:"Chat",chatLogin:"Please {{link}} to send chat messages",chatLoginLink:"login",chatSend:"Send",chatPlaceholder:"Type your chat message here...",chatErrorUnknown:"Unexpected error while sending chat message",chatErrorDisabled:"Chat is not enabled",serversHeading:"Servers",worldsSkeleton:"No maps have been configured",playersSkeleton:"No players are currently online",playersTitle:"Click to center on player\nDouble-click to follow player",playersTitleHidden:"This player is currently hidden from the map\nDouble-click to follow player when they become visible",playersTitleOtherWorld:"This player is in another world.\nClick to center on player\nDouble-click to follow player",followingHeading:"Following",followingUnfollow:"Unfollow",followingTitleUnfollow:"Stop following this player",followingHidden:"Currently hidden",linkTitle:"Copy link to current location",loadingTitle:"Loading...",locationRegion:"Region",locationChunk:"Chunk",contextMenuCopyLink:"Copy link to here",contextMenuCenterHere:"Center here",toggleTitle:"Click to toggle this section",mapTitle:"Map - Use the arrow keys to pan the map",layersTitle:"Layers",copyToClipboardSuccess:"Copied to clipboard",copyToClipboardError:"Unable to copy to clipboard"}};
     </script>
 
     <style>
@@ -248,7 +216,7 @@
     </div>
 
     <noscript>
-        <strong>LiveAtlas requires JavaScript to work.<br />Please enable it to continue.</strong>
+        <strong>This map requires JavaScript to work.<br />Please enable it to continue.</strong>
     </noscript>
 
     <main id="app" aria-hidden="true"></main>
