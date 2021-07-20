@@ -101,6 +101,7 @@ interface LiveAtlasWorldState {
 
 interface LiveAtlasWorldMap {
 	world: LiveAtlasWorld;
+	appendToWorld: LiveAtlasWorld;
 	name: string;
 	icon: string;
 	title: string;
