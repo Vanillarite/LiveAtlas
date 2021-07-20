@@ -209,6 +209,7 @@ export default defineComponent({
 					try {
 						useStore().commit(MutationTypes.SET_CURRENT_MAP, {
 							worldName: newValue.world,
+							realWorldName: newValue.map.includes("__") ? newValue.map.split("__")[1] : newValue.map,
 							mapName: newValue.map
 						});
 					} catch(e) {
@@ -324,7 +325,7 @@ export default defineComponent({
 					this.scheduledZoom = store.state.configuration.followZoom;
 				}
 
-				console.log(`Switching map to match player ${targetWorld.name} ${map.name}`);
+				console.log(`Switching map to match player ${map.appendToWorld.name} ${targetWorld.name} ${map.name}`);
 				store.commit(MutationTypes.SET_CURRENT_MAP, {worldName: map.appendToWorld.name, mapName: map.name, realWorldName: targetWorld.name});
 			} else {
 				this.leaflet!.panTo(store.state.currentProjection.locationToLatLng(player.location));

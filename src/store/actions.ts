@@ -28,7 +28,7 @@ import {
 	DynmapUpdateResponse
 } from "@/dynmap";
 import {getAPI} from "@/util";
-import {LiveAtlasWorld} from "@/index";
+import {LiveAtlasWorld, LiveAtlasWorldMap} from "@/index";
 
 type AugmentedActionContext = {
 	commit<K extends keyof Mutations>(
@@ -137,7 +137,7 @@ export const actions: ActionTree<State, State> & Actions = {
 			}
 
 			if (mapName) {
-				const map = world.maps.get(mapName) as DynmapWorldMap;
+				const map = world.maps.get(mapName) as LiveAtlasWorldMap;
 				realWorldName = map.world.name;
 			}
 		}
