@@ -167,9 +167,7 @@ export class DynmapTileLayer extends TileLayer {
 		tile.dataset.src = this.getTileUrl(coords);
 
 		this._namedTiles.set(tile.tileName, tile);
-		this._loadQueue.push(tile);
 
-		//Use addEventListener here
 		tile.onload = () => {
 			this._tileOnLoad(done, tile);
 			this._loadingTiles.delete(tile);
@@ -181,13 +179,22 @@ export class DynmapTileLayer extends TileLayer {
 			this._tickLoadQueue();
 		};
 
-		this._tickLoadQueue();
+		this._enqueue(tile);
 
 		return tile;
 	}
 
+	_enqueue(tile: DynmapTileElement) {
+		if (this._loadingTiles.size > 32) {
+			this._loadQueue.push(tile);
+		} else {
+			this._loadingTiles.add(tile);
+			tile.src = tile.dataset.src as string;
+		}
+	}
+
 	_tickLoadQueue() {
-		if (this._loadingTiles.size > 6) {
+		if (this._loadingTiles.size > 32) {
 			return;
 		}
 
